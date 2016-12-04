@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/ems?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true"/>
+        <property name="username" value="ems"/>
+        <property name="password" value="ems"/>
+    </bean>
+
+    <!-- 配置SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:hibernate/entity/Course.hbm.xml</value>
+                <value>classpath:hibernate/entity/Mark.hbm.xml</value>
+                <value>classpath:hibernate/entity/Point.hbm.xml</value>
+                <value>classpath:hibernate/entity/SchoolYear.hbm.xml</value>
+                <value>classpath:hibernate/entity/User.hbm.xml</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <!-- 配置一个事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- 配置事务，使用代理的方式 -->
+    <bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="modify*">PROPAGATION_REQUIRED,-myException</prop>
+                <prop key="del*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 注解扫描包 -->
+    <context:component-scan base-package="com.banixc.j2ee.ems" />
+
+    <!-- 开启注解 -->
+    <mvc:annotation-driven />
+
+    <!-- 静态资源(js/image)的访问 -->
+    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
+
+    <!-- 定义视图解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>     <!-- 支持JSTL -->
+
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <mvc:interceptors>
+    <!-- 开启权限控制 -->
+    <bean class="com.banixc.j2ee.ems.framework.interceptor.Interceptor"/>
+    </mvc:interceptors>
+
+    <bean id="pointDAO" class="com.banixc.j2ee.ems.dao.PointDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="markDAO" class="com.banixc.j2ee.ems.dao.MarkDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="courseDAO" class="com.banixc.j2ee.ems.dao.CourseDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userDAO" class="com.banixc.j2ee.ems.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="schoolYearDAO" class="com.banixc.j2ee.ems.dao.SchoolYearDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="courseServiceBase" class="com.banixc.j2ee.ems.service.CourseServiceImpl">
+        <property name="courseDAO" ref="courseDAO"/>
+        <property name="schoolYearDAO" ref="schoolYearDAO"/>
+        <property name="pointDAO" ref="pointDAO" />
+        <property name="markDAO" ref="markDAO" />
+        <property name="userDAO" ref="userDAO" />
+    </bean>
+
+    <bean id="userServiceBase" class="com.banixc.j2ee.ems.service.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+
+    <!-- 此处为代理 -->
+    <bean name="courseService" parent="transactionProxy">
+        <property name="target" ref="courseServiceBase"/>
+    </bean>
+
+    <bean name="userService" parent="transactionProxy">
+        <property name="target" ref="userServiceBase"/>
+    </bean>
+
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

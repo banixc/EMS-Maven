@@ -1,0 +1,38 @@
+body {
+    padding-top: 70px;
+}
+
+.center {
+    width: auto;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-center {
+    text-align: center;
+}
+
+a:link.unlink,a:visited.unlink.a:hover.unlink,a:active.unlink {
+    text-decoration: none;
+}
+
+.no-border {
+    border-top: 1px solid transparent !important;
+}
+
+.tools-button {
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.replace-hidden {
+    display: none;
+}
+
+.input-size {
+    height: 34px;
+}
+
+.in-line {
+    display: inline-block;
+}

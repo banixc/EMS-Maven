@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.banixc.j2ee.ems.entity.Course" table="course" schema="ems">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(255)"/>
+        </property>
+        <property name="credit">
+            <column name="credit" sql-type="decimal(10,2)" precision="10" scale="2"/>
+        </property>
+        <property name="num">
+            <column name="num" sql-type="int(11)"/>
+        </property>
+        <property name="teacherName">
+            <column name="teacher_name" sql-type="varchar(64)" length="64"/>
+        </property>
+        <many-to-one name="schoolYear" class="com.banixc.j2ee.ems.entity.SchoolYear">
+            <column name="school_year_id"/>
+        </many-to-one>
+        <set name="points" inverse="false">
+            <key>
+                <column name="course_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.banixc.j2ee.ems.entity.Point"/>
+        </set>
+        <set name="selectors" inverse="false" table="course_select" schema="ems">
+            <key>
+                <column name="course_id"/>
+            </key>
+            <many-to-many not-found="ignore" class="com.banixc.j2ee.ems.entity.User">
+                <column name="student_id"/>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
