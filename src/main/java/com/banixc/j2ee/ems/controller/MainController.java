@@ -1,7 +1,6 @@
 package com.banixc.j2ee.ems.controller;
 
 import com.banixc.j2ee.ems.framework.auth.Auth;
-import com.banixc.j2ee.ems.base.BaseController;
 import com.banixc.j2ee.ems.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

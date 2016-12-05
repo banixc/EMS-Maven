@@ -1,4 +1,4 @@
-package com.banixc.j2ee.ems.base;
+package com.banixc.j2ee.ems.controller;
 
 import com.banixc.j2ee.ems.entity.User;
 import com.banixc.j2ee.ems.framework.message.Result;

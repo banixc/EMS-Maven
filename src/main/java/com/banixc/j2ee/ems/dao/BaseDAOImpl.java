@@ -1,4 +1,4 @@
-package com.banixc.j2ee.ems.base;
+package com.banixc.j2ee.ems.dao;
 
 import com.banixc.j2ee.ems.framework.util.Pagination;
 import org.hibernate.Session;

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static com.banixc.j2ee.ems.framework.auth.Auth.*;
-import static com.banixc.j2ee.ems.base.BaseController.SESSION_LAST_REQUEST;
-import static com.banixc.j2ee.ems.base.BaseController.SESSION_USER_ADMIN;
+import static com.banixc.j2ee.ems.controller.BaseController.SESSION_LAST_REQUEST;
+import static com.banixc.j2ee.ems.controller.BaseController.SESSION_USER_ADMIN;
 
 
 public class Interceptor extends HandlerInterceptorAdapter {

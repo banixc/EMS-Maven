@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
-import static com.banixc.j2ee.ems.base.BaseDAOImpl.DEFAULT_PAGE_ROWS;
+import static com.banixc.j2ee.ems.dao.BaseDAOImpl.DEFAULT_PAGE_ROWS;
 
 public class CourseServiceImpl implements ICourseService {
 

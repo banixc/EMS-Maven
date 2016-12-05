@@ -5,7 +5,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-import static com.banixc.j2ee.ems.base.BaseDAOImpl.DEFAULT_PAGE_ROWS;
+import static com.banixc.j2ee.ems.dao.BaseDAOImpl.DEFAULT_PAGE_ROWS;
 
 public class PaginationTag extends SimpleTagSupport {
 

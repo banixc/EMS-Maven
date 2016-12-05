@@ -1,12 +1,9 @@
 package com.banixc.j2ee.ems.dao;
 
-import com.banixc.j2ee.ems.base.BaseDAOImpl;
 import com.banixc.j2ee.ems.entity.Mark;
 import com.banixc.j2ee.ems.entity.Point;
 import com.banixc.j2ee.ems.entity.User;
 import org.hibernate.Session;
-
-import java.util.List;
 
 public class MarkDAOImpl extends BaseDAOImpl<Mark> implements IMarkDAO {
 

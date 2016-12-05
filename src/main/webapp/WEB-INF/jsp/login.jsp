@@ -100,7 +100,7 @@
         }
 
         body {
-            background: url("http://i.imgur.com/2AkQqO7.png") no-repeat;
+            background: url("http://imgur.com/NVFeDWm.png") no-repeat;
             background-size: cover;
         }
 

@@ -1,4 +1,4 @@
-package com.banixc.j2ee.ems.base;
+package com.banixc.j2ee.ems.entity;
 
 import java.math.BigDecimal;
 

@@ -2,7 +2,6 @@ package com.banixc.j2ee.ems.controller;
 
 
 import com.banixc.j2ee.ems.framework.auth.Auth;
-import com.banixc.j2ee.ems.base.BaseController;
 import com.banixc.j2ee.ems.entity.Course;
 import com.banixc.j2ee.ems.entity.Mark;
 import com.banixc.j2ee.ems.entity.Point;

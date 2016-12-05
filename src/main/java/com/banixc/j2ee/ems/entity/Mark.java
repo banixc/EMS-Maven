@@ -1,7 +1,5 @@
 package com.banixc.j2ee.ems.entity;
 
-import com.banixc.j2ee.ems.base.BaseEntity;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 

@@ -4,7 +4,7 @@ import com.banixc.j2ee.ems.dao.IUserDAO;
 import com.banixc.j2ee.ems.entity.User;
 import com.banixc.j2ee.ems.framework.util.Pagination;
 
-import static com.banixc.j2ee.ems.base.BaseDAOImpl.DEFAULT_PAGE_ROWS;
+import static com.banixc.j2ee.ems.dao.BaseDAOImpl.DEFAULT_PAGE_ROWS;
 import static com.banixc.j2ee.ems.entity.User.hashPass;
 
 public class UserServiceImpl implements IUserService {

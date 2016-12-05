@@ -1,6 +1,5 @@
 package com.banixc.j2ee.ems.entity;
 
-import com.banixc.j2ee.ems.base.BaseEntity;
 import com.banixc.j2ee.ems.framework.util.MD5Util;
 
 import javax.persistence.*;

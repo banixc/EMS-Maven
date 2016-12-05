@@ -9,7 +9,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-import static com.banixc.j2ee.ems.base.BaseController.SESSION_MESSAGE;
+import static com.banixc.j2ee.ems.controller.BaseController.SESSION_MESSAGE;
 import static com.banixc.j2ee.ems.framework.message.Result.*;
 
 public class MessageBoxTag extends SimpleTagSupport {
